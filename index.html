@@ -1,483 +1,1528 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth overflow-x-hidden w-full"><head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BAKU | Dessert Studio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script crossorigin="" src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin="" src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;900&family=Instrument+Serif:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-body {
-font-family: 'Inter', sans-serif;
--webkit-font-smoothing: antialiased;
-background-color: #ffffff;
-overflow-x: hidden;
-width: 100%;
-max-width: 100vw;
-}
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 4px; height: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #e4e4e7; }
-::-webkit-scrollbar-thumb:hover { background: #a1a1aa; }
-@keyframes marquee {
-0% { transform: translateX(0); }
-100% { transform: translateX(-50%); }
-}
-.animate-marquee {
-display: flex;
-width: fit-content;
-animation: marquee 20s linear infinite;
-}
-@media (min-width: 768px) {
-.animate-marquee { animation-duration: 40s; }
-}
-.text-reveal-content {
-transform: translateY(120%);
-transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-will-change: transform;
-}
-.is-visible .text-reveal-content {
-transform: translateY(0);
-}
-.product-grid-layout {
-display: grid;
-grid-template-columns: 280px minmax(0, 1fr);
-gap: 60px;
-width: 100%;
-}
-@media (max-width: 1024px) {
-.product-grid-layout {
-display: flex;
-flex-direction: column;
-width: 100%;
-gap: 32px;
-}
-}
-.animate-fade-in {
-animation: fadeIn 0.8s ease-out forwards;
-}
-@keyframes fadeIn {
-from { opacity: 0; transform: translateY(10px); }
-to { opacity: 1; transform: translateY(0); }
-}
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-</style></head>
-<body class="min-h-screen flex flex-col selection:bg-black selection:text-white text-black w-full overflow-x-hidden max-w-[100vw]">
-    <div id="root" class=""><div class="flex flex-col min-h-screen"><header class="fixed z-40 transition-all duration-300 bg-white/95 w-full border-black/5 border-b top-0 backdrop-blur-sm"><div class="md:px-12 flex md:h-20 w-full h-16 items-center justify-between px-4"><button class="hover:opacity-70 transition-opacity bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c3140926-c0d2-4355-8485-acd90b296add_320w.png)] bg-cover w-[100px] h-[40px] md:w-[140px] md:h-[50px] bg-center"></button><nav class="hidden md:flex gap-x-12 items-center"><button class="text-[11px] uppercase transition-colors tracking-[0.15em] font-bold text-black border-b border-black">Home</button><button class="text-[11px] uppercase transition-colors tracking-[0.15em] font-medium text-zinc-700 hover:text-zinc-500">Catálogo</button><button class="text-[11px] uppercase transition-colors tracking-[0.15em] font-medium text-zinc-700 hover:text-zinc-500">Nosotros</button><button class="text-[11px] uppercase transition-colors tracking-[0.15em] font-medium text-zinc-700 hover:text-zinc-500">Contacto</button></nav><div class="flex items-center gap-4 md:hidden"><button class="p-1"><iconify-icon icon="solar:hamburger-menu-linear" class="w-6 h-6 stroke-[1.5]" style="font-size: inherit;"></iconify-icon></button></div></div></header><div class="fixed inset-0 z-50 bg-white transform translate-y-full transition-transform duration-500 flex flex-col pt-24 px-6 h-screen w-screen overflow-hidden"><button class="absolute top-4 right-4 p-2"><iconify-icon icon="solar:close-circle-linear" class="w-8 h-8 stroke-[1.5]" style="font-size: inherit;"></iconify-icon></button><nav class="flex flex-col gap-6 mt-8"><button class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase">home</button><button class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase">Catálogo</button><button class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase">nosotros</button><button class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase">contacto</button></nav><div class="mt-auto mb-12"><p class="text-zinc-400 text-sm uppercase tracking-widest">Baku Dessert Studio</p></div></div><main class="flex-grow pt-16 md:pt-20"><div class="page-view animate-fade-in overflow-hidden"><section class="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center relative overflow-hidden bg-black"><div class="z-0 absolute inset-0"><img src="https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?q=80&w=2560" class="object-center w-full h-full object-cover opacity-80 transition-opacity duration-1000" alt="Hero"><div class="bg-black/30 absolute inset-0"></div></div><div class="select-none cursor-default text-white text-center w-full relative px-4"><h1 class="text-[15vw] md:text-[12vw] leading-[0.85] flex flex-col items-center justify-center font-bold tracking-tighter w-full"><span class="block">DESSERT</span><span class="relative">STUDIO</span></h1></div></section><section class="grid grid-cols-1 md:grid-cols-2 bg-white w-full max-w-none"><div class="flex flex-col order-2 md:order-1 md:py-16 md:px-24 py-12 px-6 justify-center"><h2 class="leading-[0.9] uppercase text-4xl md:text-7xl lg:text-9xl font-semibold text-black tracking-tighter mb-8">Handmade Bread with<br>a Modern Vision</h2><p class="leading-relaxed text-base md:text-xl font-normal text-zinc-500 max-w-lg mb-12">Exploramos la intersección entre la panadería artesanal tradicional y la estética contemporánea. Ingredientes puros, tiempo y diseño.</p><div><button class="text-xs font-semibold uppercase tracking-widest border-b-[1.5px] border-black pb-0.5 hover:text-zinc-600 hover:border-zinc-600 transition-colors">Conoce nuestra historia</button></div></div><div class="flex md:p-12 order-1 md:order-2 bg-white w-full border-zinc-100 border-b relative items-center justify-center"><div class="relative w-full aspect-square flex items-center justify-center overflow-hidden"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f817f7b7-4802-46be-9931-25fbe59366e8_3840w.jpg" class="object-center mix-blend-multiply w-full h-auto max-w-full object-contain" alt="Baku"></div></div></section><div class="overflow-hidden md:py-4 bg-black w-full border-black/10 border-t border-b pt-3 pb-3 relative"><div class="animate-marquee whitespace-nowrap text-white items-center flex"><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span><span class="mx-2 md:mx-4 opacity-50">•</span><span class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span><span class="mx-2 md:mx-4 opacity-50">•</span></div></div><section class="bg-white py-20 md:py-32 px-6 md:px-12 text-center border-b border-black/10"><div class="max-w-4xl mx-auto flex flex-col items-center"><h2 class="text-3xl md:text-6xl font-semibold uppercase tracking-tighter text-black mb-10 md:mb-14 leading-none">Explora nuestra colección completa</h2><a href="https://heyzine.com/flip-book/7c001925b9.html" target="_blank" rel="noopener noreferrer" class="inline-block md:px-16 md:py-8 uppercase hover:bg-zinc-900 transition-all duration-300 transform hover:-translate-y-1 text-xs font-bold text-white tracking-[0.2em] bg-black pt-6 pr-10 pb-6 pl-10">VER CATÁLOGO INTERACTIVO 2026</a></div></section><section class="bg-white"><div class="md:px-12 md:pt-24 md:pb-12 px-6 pt-12 pb-8"><h2 class="md:text-8xl text-4xl font-semibold text-black tracking-tighter mb-4 uppercase">SIGNATURE PIECES</h2><p class="md:text-lg leading-relaxed text-base font-light text-black max-w-md">Una selección de nuestras piezas más representativas, elegidas por quienes más disfrutan de nuestro estudio.</p></div><div class="grid grid-cols-1 md:grid-cols-3 md:px-12 md:pb-12 px-6 pb-8 gap-6"><div class="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in" style="animation-delay: 0ms;"><div class="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d47754d-d458-42a9-91af-d604fbcd3349_1600w.png" class="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain" alt="Bollo Suizo"></div><div class="mt-4"><h3 class="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">Bollo Suizo</h3></div></div><div class="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in" style="animation-delay: 100ms;"><div class="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ba344dc-cd03-404e-bf53-c4b26f1a2bc4_1600w.png" class="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain" alt="Palmera de Pistacho"></div><div class="mt-4"><h3 class="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">Palmera de Pistacho</h3></div></div><div class="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in" style="animation-delay: 200ms;"><div class="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a18fdea6-1b08-4c8e-8c89-8917954c78bb_1600w.png" class="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain" alt="Tarta de Fresa"></div><div class="mt-4"><h3 class="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">Tarta de Fresa</h3></div></div></div></section><section class="md:px-12 md:py-32 py-20 px-6 bg-white border-zinc-950/10 border-b"><div class="grid grid-cols-1 md:grid-cols-2 md:gap-24 items-center"><div class="flex flex-col order-2 md:order-1"><span class="uppercase text-sm font-semibold text-zinc-400 tracking-widest mb-8">NUESTRA FILOSOFÍA</span><h2 class="leading-[0.9] md:text-7xl lg:text-[7rem] text-5xl font-semibold text-black tracking-tighter mb-10">MENOS AZÚCAR,<br>MÁS SABOR REAL</h2><p class="leading-relaxed text-lg font-light text-zinc-600 max-w-2xl mb-16">En BAKU trabajamos con pocos ingredientes y mucha intención. Creemos en una pastelería que no oculta su sabor, sino que lo revela: frutas de temporada, harinas honestas y técnicas precisas.</p><div class="flex gap-24 border-black/5 border-t pt-10"><div><span class="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2">24h</span><span class="text-xs font-bold uppercase tracking-widest text-zinc-400">FERMENTACIÓN</span></div><div><span class="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2">100%</span><span class="text-xs font-bold uppercase tracking-widest text-zinc-400">NATURAL</span></div></div></div><div class="flex order-1 md:order-2 items-center justify-center mb-12 md:mb-0"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/02ea7ead-dbcc-4df2-a28a-ccfb47c31ced_1600w.png" class="mix-blend-multiply w-full h-auto max-w-full object-contain scale-110" alt="Philosophy"></div></div></section><div class="md:px-12 md:py-32 pt-12 pr-6 pb-12 pl-6"><h2 class="flex flex-col text-[9vw] md:text-[8vw] leading-[0.9] md:leading-[0.8] font-semibold tracking-tighter text-black uppercase text-left"><span class="block overflow-hidden"><span class="block text-reveal-content">DESSERT IS A FORM OF</span></span><span class="block overflow-hidden"><span class="block text-reveal-content" style="transition-delay: 0.1s;">ART WE CREATE MODERN</span></span><span class="block overflow-hidden"><span class="block text-reveal-content" style="transition-delay: 0.2s;">SWEET EXPERIENCES</span></span><span class="block overflow-hidden"><span class="block text-reveal-content" style="transition-delay: 0.3s;">DESSERT STUDIO 2025*</span></span></h2></div></div></main><footer class="text-black bg-white border-black/10 border-t w-full overflow-hidden"><div class="md:px-12 md:pb-10 md:pt-10 max-w-[1920px] mx-auto pt-12 pr-6 pb-12 pl-6"><div class="flex flex-col lg:flex-row gap-12 lg:gap-24"><div class="flex-1 flex flex-col justify-center items-center lg:items-start min-h-[200px] lg:min-h-0"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aba01845-01ea-4dbd-b72f-625f32e2e7b5_1600w.png" alt="Baku" class="w-full h-full object-contain object-center lg:object-left max-h-[200px] lg:max-h-[500px]"></div><div class="flex-1 flex flex-col justify-between pt-4"><div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-12"><div><h4 class="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide">Contact</h4><ul class="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium"><li><a href="#" class="hover:text-black transition-colors">hello@baku.studio</a></li><li>M/F 10am - 6pm</li><li>Based in Spain</li></ul></div><div><h4 class="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide">Follow Us</h4><ul class="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium"><li><a href="https://www.instagram.com/baku_dessert" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors">Instagram</a></li><li><a href="#" class="hover:text-black transition-colors">TikTok</a></li></ul></div></div><div class="flex flex-col md:flex-row md:items-end gap-6 md:mt-20 mt-12 justify-between"><div class="max-w-xs"><p class="leading-relaxed text-sm text-zinc-500">Pastelería artesanal con visión contemporánea.</p></div><div class="text-zinc-400 text-sm">© 2025 Baku Dessert Studio.</div></div></div></div></div></footer></div></div>
-
-    <script type="text/babel">
-        const { useState, useEffect, useRef, useMemo } = React;
-
-        // --- ICONS (Mapped to Iconify Solar Linear) ---
-        const Menu = ({ className }) => <iconify-icon icon="solar:hamburger-menu-linear" class={className} style={{fontSize: 'inherit'}}></iconify-icon>;
-        const X = ({ className }) => <iconify-icon icon="solar:close-circle-linear" class={className} style={{fontSize: 'inherit'}}></iconify-icon>;
-        const ArrowRight = ({ className }) => <iconify-icon icon="solar:arrow-right-linear" class={className} style={{fontSize: 'inherit'}}></iconify-icon>;
-
-        // --- DATA ---
-        const MOCK_PRODUCTS = [
-          { id: 'b1', name: 'Bollo Suizo', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d47754d-d458-42a9-91af-d604fbcd3349_1600w.png', desc: 'Tierno, esponjoso y con el toque justo de azúcar perlado.', category: 'bolleria' },
-          { id: 'b2', name: 'Magdalena Casera', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1709f0c7-88aa-43ec-829b-f2ea29720e6e_800w.png', desc: 'El sabor de siempre, hecha a mano cada mañana.', category: 'bolleria' },
-          { id: 'b3', name: 'Cinnamon Rolls', unit: ' (Plancha 60x40)', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b4a33127-a876-4857-ad72-b272950c6eb0_800w.png', desc: 'Nuestra famosa masa de brioche enrollada con canela y mantequilla.', category: 'bolleria' },
-          { id: 'b4', name: 'Mini Pasteles Surtidos', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c74cc0f8-b7cf-491d-88c3-b08d7f91cb11_800w.png', desc: 'Pequeños bocados de nuestra mejor pastelería.', category: 'bolleria' },
-          { id: 'p1', name: 'Palmera de Pistacho', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ba344dc-cd03-404e-bf53-c4b26f1a2bc4_800w.png', desc: 'Cubierta con nuestra crema artesana de pistacho puro.', category: 'palmeras' },
-          { id: 'p2', name: 'Palmera Kinder', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/67b2c02d-e489-477c-96ff-a696eddb692d_1600w.png', desc: 'El capricho de chocolate blanco y crema de avellanas.', category: 'palmeras' },
-          { id: 'p3', name: 'Palmera Sacher', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/30aea6a9-5541-43ba-837a-c5837c0cada2_800w.png', desc: 'Rellena de fresa y bañada en chocolate negro intenso.', category: 'palmeras' },
-          { id: 'p4', name: 'Palmera de Yema Tostada', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f257263a-474b-432d-a81b-def8ef751277_1600w.png', desc: 'Un clásico con nuestra yema caramelizada a fuego.', category: 'palmeras' },
-          { id: 'p5', name: 'Palmera de Chocolate', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/9c772efb-7446-4ce7-a028-7907002a9599_1600w.png', desc: 'Bañada en chocolate crujiente de alta calidad.', category: 'palmeras' },
-          { id: 'p6', name: 'Palmera Blanco y Negro', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2ca691de-7e3a-44e6-8919-6e85c37e1f30_1600w.png', desc: 'Doble cobertura de chocolate para no tener que elegir.', category: 'palmeras' },
-          { id: 'p7', name: 'Palmera de Albaricoque', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aeb6ca7e-010a-4f47-8c7d-c50c0552e906_800w.png', desc: 'Con una capa de mermelada fina y brillante.', category: 'palmeras' },
-          { id: 'p8', name: 'Palmera Normal', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/85cf8a5e-9397-4300-a1be-668256be8967_800w.png', desc: 'La clásica de hojaldre crujiente y mantequilla.', category: 'palmeras' },
-          { id: 't1', name: 'Cheesecake Pistacho', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/af2a301c-a0b1-4d2a-8d73-8c2da5ac31e8_800w.png', desc: 'Nuestra tarta de queso ultra cremosa con un toque de pistacho.', category: 'tartas' },
-          { id: 't2', name: 'Cheesecakes Variadas', unit: ' (355 ml)', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/35af0342-f90d-4580-b451-0df6dadd049b_800w.png', desc: 'Formato individual. Sabores: Normal, Oreo, Lotus, Kinder o Yogur.', category: 'tartas' },
-          { id: 't3', name: 'Tarta de Fresa', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a18fdea6-1b08-4c8e-8c89-8917954c78bb_1600w.png', desc: 'Bizcocho tierno con fresas naturales seleccionadas.', category: 'tartas' },
-          { id: 't4', name: 'Tarta Corazón Chocolate', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/95b86b98-5c5f-4969-a0e9-c9c3673f6f1b_800w.png', desc: 'Nuestra versión más dulce para los amantes del cacao.', category: 'tartas' },
-          { id: 't5', name: 'Tarta de Santiago', unit: ' (Plancha 1,2kg)', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/abb9d1ac-66ab-46bb-97f2-5c59647aa6fd_800w.png', desc: 'Receta tradicional con 100% almendra molida.', category: 'tartas' },
-          { id: 't6', name: 'Santiago Individual', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d3692c0-2442-40c4-a831-c1bdad432c8c_800w.png', desc: 'La porción perfecta de nuestro clásico de almendra.', category: 'tartas' },
-          { id: 't7', name: 'Tarta Corazón Glaseado', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4e8ecac0-fa21-453f-b4a5-f29e8799e01e_1600w.png', desc: 'Nuestra tarta de corazón glaseada, irresistible por fuera y cremosa y deliciosa por dentro.', category: 'tartas' },
-          { id: 't8', name: 'Tarta Chocolate Negro', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ed8912b-e9d3-4c24-93b0-c3e3024bd133_1600w.png', desc: 'Tarta para los verdaderos amantes del chocolate, un sabor intenso y único de principio a fin.', category: 'tartas' },
-          { id: 'te1', name: 'Pastas de Té', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/064875c2-3da7-42cd-acee-4282ad327b21_1600w.png', desc: 'Surtido de mantequilla ideal para acompañar el café.', category: 'pastas' },
-          { id: 'te2', name: 'Tejas de Piñón', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/ebaa0b11-022f-40c4-8bea-8748add05f7d_800w.png', desc: 'Finas láminas crujientes cargadas de piñón nacional.', category: 'pastas' },
-          { id: 'te3', name: 'Tejas de Almendra', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4f7f2b90-1187-4f0c-92ec-7923061ad8b6_1600w.png', desc: 'El bocado más crujiente de nuestra selección.', category: 'pastas' },
-          { id: 'te4', name: 'Tejas de Frutos Secos', img: 'https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/00018c50-5688-4bea-9ecc-bfb2eee0a9e9_800w.png', desc: 'Mix de frutos tostados sobre una masa ligera y dulce.', category: 'pastas' }
-        ];
-
-        // --- COMPONENTS ---
-
-        const Navbar = ({ currentView, onNavigate, onToggleMenu }) => {
-          const links = [
-            { id: 'home', label: 'Home' },
-            { id: 'catalogo', label: 'Catálogo' },
-            { id: 'nosotros', label: 'Nosotros' },
-            { id: 'contacto', label: 'Contacto' },
-          ];
-
-          return (
-            <header className="fixed z-40 transition-all duration-300 bg-white/95 w-full border-black/5 border-b top-0 backdrop-blur-sm">
-              <div className="md:px-12 flex md:h-20 w-full h-16 items-center justify-between px-4">
-                <button 
-                  onClick={() => onNavigate('home')} 
-                  className="hover:opacity-70 transition-opacity bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c3140926-c0d2-4355-8485-acd90b296add_320w.png)] bg-cover w-[100px] h-[40px] md:w-[140px] md:h-[50px] bg-center"
+<!doctype html>
+<html lang="es" class="scroll-smooth overflow-x-hidden w-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>BAKU | Dessert Studio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script
+      crossorigin=""
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin=""
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;900&family=Instrument+Serif:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        -webkit-font-smoothing: antialiased;
+        background-color: #ffffff;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #e4e4e7;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a1a1aa;
+      }
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .animate-marquee {
+        display: flex;
+        width: fit-content;
+        animation: marquee 20s linear infinite;
+      }
+      @media (min-width: 768px) {
+        .animate-marquee {
+          animation-duration: 40s;
+        }
+      }
+      .text-reveal-content {
+        transform: translateY(120%);
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: transform;
+      }
+      .is-visible .text-reveal-content {
+        transform: translateY(0);
+      }
+      .product-grid-layout {
+        display: grid;
+        grid-template-columns: 280px minmax(0, 1fr);
+        gap: 60px;
+        width: 100%;
+      }
+      @media (max-width: 1024px) {
+        .product-grid-layout {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          gap: 32px;
+        }
+      }
+      .animate-fade-in {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    class="min-h-screen flex flex-col selection:bg-black selection:text-white text-black w-full overflow-x-hidden max-w-[100vw]"
+  >
+    <div id="root" class="">
+      <div class="flex flex-col min-h-screen">
+        <header
+          class="fixed z-40 transition-all duration-300 bg-white/95 w-full border-black/5 border-b top-0 backdrop-blur-sm"
+        >
+          <div
+            class="md:px-12 flex md:h-20 w-full h-16 items-center justify-between px-4"
+          >
+            <button
+              class="hover:opacity-70 transition-opacity bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c3140926-c0d2-4355-8485-acd90b296add_320w.png)] bg-cover w-[100px] h-[40px] md:w-[140px] md:h-[50px] bg-center"
+            ></button>
+            <nav class="hidden md:flex gap-x-12 items-center">
+              <button
+                class="text-[11px] uppercase transition-colors tracking-[0.15em] font-bold text-black border-b border-black"
+              >
+                Home</button
+              ><button
+                class="text-[11px] uppercase transition-colors tracking-[0.15em] font-medium text-zinc-700 hover:text-zinc-500"
+              >
+                Catálogo</button
+              ><button
+                class="text-[11px] uppercase transition-colors tracking-[0.15em] font-medium text-zinc-700 hover:text-zinc-500"
+              >
+                Nosotros</button
+              ><button
+                class="text-[11px] uppercase transition-colors tracking-[0.15em] font-medium text-zinc-700 hover:text-zinc-500"
+              >
+                Contacto
+              </button>
+            </nav>
+            <div class="flex items-center gap-4 md:hidden">
+              <button class="p-1">
+                <iconify-icon
+                  icon="solar:hamburger-menu-linear"
+                  class="w-6 h-6 stroke-[1.5]"
+                  style="font-size: inherit"
+                ></iconify-icon>
+              </button>
+            </div>
+          </div>
+        </header>
+        <div
+          class="fixed inset-0 z-50 bg-white transform translate-y-full transition-transform duration-500 flex flex-col pt-24 px-6 h-screen w-screen overflow-hidden"
+        >
+          <button class="absolute top-4 right-4 p-2">
+            <iconify-icon
+              icon="solar:close-circle-linear"
+              class="w-8 h-8 stroke-[1.5]"
+              style="font-size: inherit"
+            ></iconify-icon>
+          </button>
+          <nav class="flex flex-col gap-6 mt-8">
+            <button
+              class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase"
+            >
+              home</button
+            ><button
+              class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase"
+            >
+              Catálogo</button
+            ><button
+              class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase"
+            >
+              nosotros</button
+            ><button
+              class="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase"
+            >
+              contacto
+            </button>
+          </nav>
+          <div class="mt-auto mb-12">
+            <p class="text-zinc-400 text-sm uppercase tracking-widest">
+              Baku Dessert Studio
+            </p>
+          </div>
+        </div>
+        <main class="flex-grow pt-16 md:pt-20">
+          <div class="page-view animate-fade-in overflow-hidden">
+            <section
+              class="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center relative overflow-hidden bg-black"
+            >
+              <div class="z-0 absolute inset-0">
+                <img
+                  src="https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?q=80&w=2560"
+                  class="object-center w-full h-full object-cover opacity-80 transition-opacity duration-1000"
+                  alt="Hero"
                 />
-                <nav className="hidden md:flex gap-x-12 items-center">
-                  {links.map((link) => (
-                    <button 
-                      key={link.id}
-                      onClick={() => onNavigate(link.id)} 
-                      className={`text-[11px] uppercase transition-colors tracking-[0.15em] ${
-                        currentView === link.id ? 'font-bold text-black border-b border-black' : 'font-medium text-zinc-700 hover:text-zinc-500'
-                      }`}
-                    >
-                      {link.label}
-                    </button>
-                  ))}
-                </nav>
-                <div className="flex items-center gap-4 md:hidden">
-                  <button onClick={onToggleMenu} className="p-1">
-                    <Menu className="w-6 h-6 stroke-[1.5]" />
+                <div class="bg-black/30 absolute inset-0"></div>
+              </div>
+              <div
+                class="select-none cursor-default text-white text-center w-full relative px-4"
+              >
+                <h1
+                  class="text-[15vw] md:text-[12vw] leading-[0.85] flex flex-col items-center justify-center font-bold tracking-tighter w-full"
+                >
+                  <span class="block">DESSERT</span
+                  ><span class="relative">STUDIO</span>
+                </h1>
+              </div>
+            </section>
+            <section
+              class="grid grid-cols-1 md:grid-cols-2 bg-white w-full max-w-none"
+            >
+              <div
+                class="flex flex-col order-2 md:order-1 md:py-16 md:px-24 py-12 px-6 justify-center"
+              >
+                <h2
+                  class="leading-[0.9] uppercase text-4xl md:text-7xl lg:text-9xl font-semibold text-black tracking-tighter mb-8"
+                >
+                  Handmade Bread with<br />a Modern Vision
+                </h2>
+                <p
+                  class="leading-relaxed text-base md:text-xl font-normal text-zinc-500 max-w-lg mb-12"
+                >
+                  Exploramos la intersección entre la panadería artesanal
+                  tradicional y la estética contemporánea. Ingredientes puros,
+                  tiempo y diseño.
+                </p>
+                <div>
+                  <button
+                    class="text-xs font-semibold uppercase tracking-widest border-b-[1.5px] border-black pb-0.5 hover:text-zinc-600 hover:border-zinc-600 transition-colors"
+                  >
+                    Conoce nuestra historia
                   </button>
                 </div>
               </div>
-            </header>
-          );
-        };
-
-        const Footer = () => (
-          <footer className="text-black bg-white border-black/10 border-t w-full overflow-hidden">
-            <div className="md:px-12 md:pb-10 md:pt-10 max-w-[1920px] mx-auto pt-12 pr-6 pb-12 pl-6">
-              <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
-                <div className="flex-1 flex flex-col justify-center items-center lg:items-start min-h-[200px] lg:min-h-0">
-                  <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aba01845-01ea-4dbd-b72f-625f32e2e7b5_1600w.png" alt="Baku" className="w-full h-full object-contain object-center lg:object-left max-h-[200px] lg:max-h-[500px]" />
+              <div
+                class="flex md:p-12 order-1 md:order-2 bg-white w-full border-zinc-100 border-b relative items-center justify-center"
+              >
+                <div
+                  class="relative w-full aspect-square flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f817f7b7-4802-46be-9931-25fbe59366e8_3840w.jpg"
+                    class="object-center mix-blend-multiply w-full h-auto max-w-full object-contain"
+                    alt="Baku"
+                  />
                 </div>
-                <div className="flex-1 flex flex-col justify-between pt-4">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-12">
+              </div>
+            </section>
+            <div
+              class="overflow-hidden md:py-4 bg-black w-full border-black/10 border-t border-b pt-3 pb-3 relative"
+            >
+              <div
+                class="animate-marquee whitespace-nowrap text-white items-center flex"
+              >
+                <span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >ARTISAN DESSERTS</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span
+                ><span
+                  class="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base"
+                  >CONTEMPORARY DESIGN</span
+                ><span class="mx-2 md:mx-4 opacity-50">•</span>
+              </div>
+            </div>
+            <section
+              class="bg-white py-20 md:py-32 px-6 md:px-12 text-center border-b border-black/10"
+            >
+              <div class="max-w-4xl mx-auto flex flex-col items-center">
+                <h2
+                  class="text-3xl md:text-6xl font-semibold uppercase tracking-tighter text-black mb-10 md:mb-14 leading-none"
+                >
+                  Explora nuestra colección completa
+                </h2>
+                <a
+                  href="https://heyzine.com/flip-book/7c001925b9.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-block md:px-16 md:py-8 uppercase hover:bg-zinc-900 transition-all duration-300 transform hover:-translate-y-1 text-xs font-bold text-white tracking-[0.2em] bg-black pt-6 pr-10 pb-6 pl-10"
+                  >VER CATÁLOGO INTERACTIVO 2026</a
+                >
+              </div>
+            </section>
+            <section class="bg-white">
+              <div class="md:px-12 md:pt-24 md:pb-12 px-6 pt-12 pb-8">
+                <h2
+                  class="md:text-8xl text-4xl font-semibold text-black tracking-tighter mb-4 uppercase"
+                >
+                  SIGNATURE PIECES
+                </h2>
+                <p
+                  class="md:text-lg leading-relaxed text-base font-light text-black max-w-md"
+                >
+                  Una selección de nuestras piezas más representativas, elegidas
+                  por quienes más disfrutan de nuestro estudio.
+                </p>
+              </div>
+              <div
+                class="grid grid-cols-1 md:grid-cols-3 md:px-12 md:pb-12 px-6 pb-8 gap-6"
+              >
+                <div
+                  class="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in"
+                  style="animation-delay: 0ms"
+                >
+                  <div
+                    class="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden"
+                  >
+                    <img
+                      src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d47754d-d458-42a9-91af-d604fbcd3349_1600w.png"
+                      class="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain"
+                      alt="Bollo Suizo"
+                    />
+                  </div>
+                  <div class="mt-4">
+                    <h3
+                      class="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase"
+                    >
+                      Bollo Suizo
+                    </h3>
+                  </div>
+                </div>
+                <div
+                  class="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in"
+                  style="animation-delay: 100ms"
+                >
+                  <div
+                    class="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden"
+                  >
+                    <img
+                      src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ba344dc-cd03-404e-bf53-c4b26f1a2bc4_1600w.png"
+                      class="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain"
+                      alt="Palmera de Pistacho"
+                    />
+                  </div>
+                  <div class="mt-4">
+                    <h3
+                      class="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase"
+                    >
+                      Palmera de Pistacho
+                    </h3>
+                  </div>
+                </div>
+                <div
+                  class="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in"
+                  style="animation-delay: 200ms"
+                >
+                  <div
+                    class="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden"
+                  >
+                    <img
+                      src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a18fdea6-1b08-4c8e-8c89-8917954c78bb_1600w.png"
+                      class="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain"
+                      alt="Tarta de Fresa"
+                    />
+                  </div>
+                  <div class="mt-4">
+                    <h3
+                      class="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase"
+                    >
+                      Tarta de Fresa
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section
+              class="md:px-12 md:py-32 py-20 px-6 bg-white border-zinc-950/10 border-b"
+            >
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 md:gap-24 items-center"
+              >
+                <div class="flex flex-col order-2 md:order-1">
+                  <span
+                    class="uppercase text-sm font-semibold text-zinc-400 tracking-widest mb-8"
+                    >NUESTRA FILOSOFÍA</span
+                  >
+                  <h2
+                    class="leading-[0.9] md:text-7xl lg:text-[7rem] text-5xl font-semibold text-black tracking-tighter mb-10"
+                  >
+                    MENOS AZÚCAR,<br />MÁS SABOR REAL
+                  </h2>
+                  <p
+                    class="leading-relaxed text-lg font-light text-zinc-600 max-w-2xl mb-16"
+                  >
+                    En BAKU trabajamos con pocos ingredientes y mucha intención.
+                    Creemos en una pastelería que no oculta su sabor, sino que
+                    lo revela: frutas de temporada, harinas honestas y técnicas
+                    precisas.
+                  </p>
+                  <div class="flex gap-24 border-black/5 border-t pt-10">
                     <div>
-                      <h4 className="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide">Contact</h4>
-                      <ul className="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium">
-                        <li><a href="#" className="hover:text-black transition-colors">hello@baku.studio</a></li>
-                        <li>M/F 10am - 6pm</li>
-                        <li>Based in Spain</li>
-                      </ul>
+                      <span
+                        class="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2"
+                        >24h</span
+                      ><span
+                        class="text-xs font-bold uppercase tracking-widest text-zinc-400"
+                        >FERMENTACIÓN</span
+                      >
                     </div>
                     <div>
-                      <h4 className="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide">Follow Us</h4>
-                      <ul className="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium">
-                        <li><a href="https://www.instagram.com/baku_dessert" target="_blank" rel="noopener noreferrer" className="hover:text-black transition-colors">Instagram</a></li>
-                        <li><a href="#" className="hover:text-black transition-colors">TikTok</a></li>
-                      </ul>
+                      <span
+                        class="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2"
+                        >100%</span
+                      ><span
+                        class="text-xs font-bold uppercase tracking-widest text-zinc-400"
+                        >NATURAL</span
+                      >
                     </div>
                   </div>
-                  <div className="flex flex-col md:flex-row md:items-end gap-6 md:mt-20 mt-12 justify-between">
-                    <div className="max-w-xs"><p className="leading-relaxed text-sm text-zinc-500">Pastelería artesanal con visión contemporánea.</p></div>
-                    <div className="text-zinc-400 text-sm">© 2025 Baku Dessert Studio.</div>
+                </div>
+                <div
+                  class="flex order-1 md:order-2 items-center justify-center mb-12 md:mb-0"
+                >
+                  <img
+                    src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/02ea7ead-dbcc-4df2-a28a-ccfb47c31ced_1600w.png"
+                    class="mix-blend-multiply w-full h-auto max-w-full object-contain scale-110"
+                    alt="Philosophy"
+                  />
+                </div>
+              </div>
+            </section>
+            <div class="md:px-12 md:py-32 pt-12 pr-6 pb-12 pl-6">
+              <h2
+                class="flex flex-col text-[9vw] md:text-[8vw] leading-[0.9] md:leading-[0.8] font-semibold tracking-tighter text-black uppercase text-left"
+              >
+                <span class="block overflow-hidden"
+                  ><span class="block text-reveal-content"
+                    >DESSERT IS A FORM OF</span
+                  ></span
+                ><span class="block overflow-hidden"
+                  ><span
+                    class="block text-reveal-content"
+                    style="transition-delay: 0.1s"
+                    >ART WE CREATE MODERN</span
+                  ></span
+                ><span class="block overflow-hidden"
+                  ><span
+                    class="block text-reveal-content"
+                    style="transition-delay: 0.2s"
+                    >SWEET EXPERIENCES</span
+                  ></span
+                ><span class="block overflow-hidden"
+                  ><span
+                    class="block text-reveal-content"
+                    style="transition-delay: 0.3s"
+                    >DESSERT STUDIO 2025*</span
+                  ></span
+                >
+              </h2>
+            </div>
+          </div>
+        </main>
+        <footer
+          class="text-black bg-white border-black/10 border-t w-full overflow-hidden"
+        >
+          <div
+            class="md:px-12 md:pb-10 md:pt-10 max-w-[1920px] mx-auto pt-12 pr-6 pb-12 pl-6"
+          >
+            <div class="flex flex-col lg:flex-row gap-12 lg:gap-24">
+              <div
+                class="flex-1 flex flex-col justify-center items-center lg:items-start min-h-[200px] lg:min-h-0"
+              >
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aba01845-01ea-4dbd-b72f-625f32e2e7b5_1600w.png"
+                  alt="Baku"
+                  class="w-full h-full object-contain object-center lg:object-left max-h-[200px] lg:max-h-[500px]"
+                />
+              </div>
+              <div class="flex-1 flex flex-col justify-between pt-4">
+                <div
+                  class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-12"
+                >
+                  <div>
+                    <h4
+                      class="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide"
+                    >
+                      Contact
+                    </h4>
+                    <ul
+                      class="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium"
+                    >
+                      <li>
+                        <a
+                          href="mailto:info@bakudesserts.com"
+                          class="hover:text-black transition-colors"
+                          >info@bakudesserts.com</a
+                        >
+                      </li>
+                      <li>M/F 10am - 6pm</li>
+                      <li>Based in Spain</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4
+                      class="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide"
+                    >
+                      Follow Us
+                    </h4>
+                    <ul
+                      class="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium"
+                    >
+                      <li>
+                        <a
+                          href="https://www.instagram.com/baku_dessert"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="hover:text-black transition-colors"
+                          >Instagram</a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col md:flex-row md:items-end gap-6 md:mt-20 mt-12 justify-between"
+                >
+                  <div class="max-w-xs">
+                    <p class="leading-relaxed text-sm text-zinc-500">
+                      Pastelería artesanal con visión contemporánea.
+                    </p>
+                  </div>
+                  <div class="text-zinc-400 text-sm">
+                    © 2025 Baku Dessert Studio.
                   </div>
                 </div>
               </div>
             </div>
-          </footer>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script type="text/babel">
+      const { useState, useEffect, useRef, useMemo } = React;
+
+      // --- ICONS (Mapped to Iconify Solar Linear) ---
+      const Menu = ({ className }) => (
+        <iconify-icon
+          icon="solar:hamburger-menu-linear"
+          class={className}
+          style={{ fontSize: "inherit" }}
+        ></iconify-icon>
+      );
+      const X = ({ className }) => (
+        <iconify-icon
+          icon="solar:close-circle-linear"
+          class={className}
+          style={{ fontSize: "inherit" }}
+        ></iconify-icon>
+      );
+      const ArrowRight = ({ className }) => (
+        <iconify-icon
+          icon="solar:arrow-right-linear"
+          class={className}
+          style={{ fontSize: "inherit" }}
+        ></iconify-icon>
+      );
+
+      // --- DATA ---
+      const MOCK_PRODUCTS = [
+        {
+          id: "b1",
+          name: "Bollo Suizo",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d47754d-d458-42a9-91af-d604fbcd3349_1600w.png",
+          desc: "Tierno, esponjoso y con el toque justo de azúcar perlado.",
+          category: "bolleria",
+        },
+        {
+          id: "b2",
+          name: "Magdalena Casera",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/1709f0c7-88aa-43ec-829b-f2ea29720e6e_800w.png",
+          desc: "El sabor de siempre, hecha a mano cada mañana.",
+          category: "bolleria",
+        },
+        {
+          id: "b3",
+          name: "Cinnamon Rolls",
+          unit: " (Plancha 60x40)",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/b4a33127-a876-4857-ad72-b272950c6eb0_800w.png",
+          desc: "Nuestra famosa masa de brioche enrollada con canela y mantequilla.",
+          category: "bolleria",
+        },
+        {
+          id: "b4",
+          name: "Mini Pasteles Surtidos",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c74cc0f8-b7cf-491d-88c3-b08d7f91cb11_800w.png",
+          desc: "Pequeños bocados de nuestra mejor pastelería.",
+          category: "bolleria",
+        },
+        {
+          id: "p1",
+          name: "Palmera de Pistacho",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ba344dc-cd03-404e-bf53-c4b26f1a2bc4_800w.png",
+          desc: "Cubierta con nuestra crema artesana de pistacho puro.",
+          category: "palmeras",
+        },
+        {
+          id: "p2",
+          name: "Palmera Kinder",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/67b2c02d-e489-477c-96ff-a696eddb692d_1600w.png",
+          desc: "El capricho de chocolate blanco y crema de avellanas.",
+          category: "palmeras",
+        },
+        {
+          id: "p3",
+          name: "Palmera Sacher",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/30aea6a9-5541-43ba-837a-c5837c0cada2_800w.png",
+          desc: "Rellena de fresa y bañada en chocolate negro intenso.",
+          category: "palmeras",
+        },
+        {
+          id: "p4",
+          name: "Palmera de Yema Tostada",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f257263a-474b-432d-a81b-def8ef751277_1600w.png",
+          desc: "Un clásico con nuestra yema caramelizada a fuego.",
+          category: "palmeras",
+        },
+        {
+          id: "p5",
+          name: "Palmera de Chocolate",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/9c772efb-7446-4ce7-a028-7907002a9599_1600w.png",
+          desc: "Bañada en chocolate crujiente de alta calidad.",
+          category: "palmeras",
+        },
+        {
+          id: "p6",
+          name: "Palmera Blanco y Negro",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2ca691de-7e3a-44e6-8919-6e85c37e1f30_1600w.png",
+          desc: "Doble cobertura de chocolate para no tener que elegir.",
+          category: "palmeras",
+        },
+        {
+          id: "p7",
+          name: "Palmera de Albaricoque",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aeb6ca7e-010a-4f47-8c7d-c50c0552e906_800w.png",
+          desc: "Con una capa de mermelada fina y brillante.",
+          category: "palmeras",
+        },
+        {
+          id: "p8",
+          name: "Palmera Normal",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/85cf8a5e-9397-4300-a1be-668256be8967_800w.png",
+          desc: "La clásica de hojaldre crujiente y mantequilla.",
+          category: "palmeras",
+        },
+        {
+          id: "t1",
+          name: "Cheesecake Pistacho",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/af2a301c-a0b1-4d2a-8d73-8c2da5ac31e8_800w.png",
+          desc: "Nuestra tarta de queso ultra cremosa con un toque de pistacho.",
+          category: "tartas",
+        },
+        {
+          id: "t2",
+          name: "Cheesecakes Variadas",
+          unit: " (355 ml)",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/35af0342-f90d-4580-b451-0df6dadd049b_800w.png",
+          desc: "Formato individual. Sabores: Normal, Oreo, Lotus, Kinder o Yogur.",
+          category: "tartas",
+        },
+        {
+          id: "t3",
+          name: "Tarta de Fresa",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a18fdea6-1b08-4c8e-8c89-8917954c78bb_1600w.png",
+          desc: "Bizcocho tierno con fresas naturales seleccionadas.",
+          category: "tartas",
+        },
+        {
+          id: "t4",
+          name: "Tarta Corazón Chocolate",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/95b86b98-5c5f-4969-a0e9-c9c3673f6f1b_800w.png",
+          desc: "Nuestra versión más dulce para los amantes del cacao.",
+          category: "tartas",
+        },
+        {
+          id: "t5",
+          name: "Tarta de Santiago",
+          unit: " (Plancha 1,2kg)",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/abb9d1ac-66ab-46bb-97f2-5c59647aa6fd_800w.png",
+          desc: "Receta tradicional con 100% almendra molida.",
+          category: "tartas",
+        },
+        {
+          id: "t6",
+          name: "Santiago Individual",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d3692c0-2442-40c4-a831-c1bdad432c8c_800w.png",
+          desc: "La porción perfecta de nuestro clásico de almendra.",
+          category: "tartas",
+        },
+        {
+          id: "t7",
+          name: "Tarta Corazón Glaseado",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4e8ecac0-fa21-453f-b4a5-f29e8799e01e_1600w.png",
+          desc: "Nuestra tarta de corazón glaseada, irresistible por fuera y cremosa y deliciosa por dentro.",
+          category: "tartas",
+        },
+        {
+          id: "t8",
+          name: "Tarta Chocolate Negro",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ed8912b-e9d3-4c24-93b0-c3e3024bd133_1600w.png",
+          desc: "Tarta para los verdaderos amantes del chocolate, un sabor intenso y único de principio a fin.",
+          category: "tartas",
+        },
+        {
+          id: "te1",
+          name: "Pastas de Té",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/064875c2-3da7-42cd-acee-4282ad327b21_1600w.png",
+          desc: "Surtido de mantequilla ideal para acompañar el café.",
+          category: "pastas",
+        },
+        {
+          id: "te2",
+          name: "Tejas de Piñón",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/ebaa0b11-022f-40c4-8bea-8748add05f7d_800w.png",
+          desc: "Finas láminas crujientes cargadas de piñón nacional.",
+          category: "pastas",
+        },
+        {
+          id: "te3",
+          name: "Tejas de Almendra",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4f7f2b90-1187-4f0c-92ec-7923061ad8b6_1600w.png",
+          desc: "El bocado más crujiente de nuestra selección.",
+          category: "pastas",
+        },
+        {
+          id: "te4",
+          name: "Tejas de Frutos Secos",
+          img: "https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/00018c50-5688-4bea-9ecc-bfb2eee0a9e9_800w.png",
+          desc: "Mix de frutos tostados sobre una masa ligera y dulce.",
+          category: "pastas",
+        },
+      ];
+
+      // --- COMPONENTS ---
+
+      const Navbar = ({ currentView, onNavigate, onToggleMenu }) => {
+        const links = [
+          { id: "home", label: "Home" },
+          { id: "catalogo", label: "Catálogo" },
+          { id: "nosotros", label: "Nosotros" },
+          { id: "contacto", label: "Contacto" },
+        ];
+
+        return (
+          <header className="fixed z-40 transition-all duration-300 bg-white/95 w-full border-black/5 border-b top-0 backdrop-blur-sm">
+            <div className="md:px-12 flex md:h-20 w-full h-16 items-center justify-between px-4">
+              <button
+                onClick={() => onNavigate("home")}
+                className="hover:opacity-70 transition-opacity bg-[url(https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c3140926-c0d2-4355-8485-acd90b296add_320w.png)] bg-cover w-[100px] h-[40px] md:w-[140px] md:h-[50px] bg-center"
+              />
+              <nav className="hidden md:flex gap-x-12 items-center">
+                {links.map((link) => (
+                  <button
+                    key={link.id}
+                    onClick={() => onNavigate(link.id)}
+                    className={`text-[11px] uppercase transition-colors tracking-[0.15em] ${
+                      currentView === link.id
+                        ? "font-bold text-black border-b border-black"
+                        : "font-medium text-zinc-700 hover:text-zinc-500"
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                ))}
+              </nav>
+              <div className="flex items-center gap-4 md:hidden">
+                <button onClick={onToggleMenu} className="p-1">
+                  <Menu className="w-6 h-6 stroke-[1.5]" />
+                </button>
+              </div>
+            </div>
+          </header>
         );
+      };
 
-        // --- VIEWS ---
-
-        const Home = ({ onNavigate }) => {
-          const [heroIndex, setHeroIndex] = useState(0);
-          const heroImgs = [
-            'https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?q=80&w=2560',
-            'https://images.unsplash.com/photo-1516919549054-e08258825f80?q=80&w=2560'
-          ];
-          const statementRef = useRef(null);
-
-          useEffect(() => {
-            const interval = setInterval(() => setHeroIndex(prev => (prev + 1) % heroImgs.length), 4000);
-            const observer = new IntersectionObserver((entries) => {
-              entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('is-visible'); });
-            }, { threshold: 0.1 });
-            if (statementRef.current) observer.observe(statementRef.current);
-            return () => { clearInterval(interval); observer.disconnect(); };
-          }, []);
-
-          return (
-            <div className="page-view animate-fade-in overflow-hidden">
-              <section className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center relative overflow-hidden bg-black">
-                <div className="z-0 absolute inset-0">
-                  <img src={heroImgs[heroIndex]} className="object-center w-full h-full object-cover opacity-80 transition-opacity duration-1000" alt="Hero" />
-                  <div className="bg-black/30 absolute inset-0"></div>
-                </div>
-                <div className="select-none cursor-default text-white text-center w-full relative px-4">
-                  <h1 className="text-[15vw] md:text-[12vw] leading-[0.85] flex flex-col items-center justify-center font-bold tracking-tighter w-full">
-                    <span className="block">DESSERT</span><span className="relative">STUDIO</span>
-                  </h1>
-                </div>
-              </section>
-
-              <section className="grid grid-cols-1 md:grid-cols-2 bg-white w-full max-w-none">
-                <div className="flex flex-col order-2 md:order-1 md:py-16 md:px-24 py-12 px-6 justify-center">
-                  <h2 className="leading-[0.9] uppercase text-4xl md:text-7xl lg:text-9xl font-semibold text-black tracking-tighter mb-8">Handmade Bread with<br/>a Modern Vision</h2>
-                  <p className="leading-relaxed text-base md:text-xl font-normal text-zinc-500 max-w-lg mb-12">Exploramos la intersección entre la panadería artesanal tradicional y la estética contemporánea. Ingredientes puros, tiempo y diseño.</p>
-                  <div><button onClick={() => onNavigate('nosotros')} className="text-xs font-semibold uppercase tracking-widest border-b-[1.5px] border-black pb-0.5 hover:text-zinc-600 hover:border-zinc-600 transition-colors">Conoce nuestra historia</button></div>
-                </div>
-                <div className="flex md:p-12 order-1 md:order-2 bg-white w-full border-zinc-100 border-b relative items-center justify-center">
-                  <div className="relative w-full aspect-square flex items-center justify-center overflow-hidden">
-                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f817f7b7-4802-46be-9931-25fbe59366e8_3840w.jpg" className="object-center mix-blend-multiply w-full h-auto max-w-full object-contain" alt="Baku" />
+      const Footer = () => (
+        <footer className="text-black bg-white border-black/10 border-t w-full overflow-hidden">
+          <div className="md:px-12 md:pb-10 md:pt-10 max-w-[1920px] mx-auto pt-12 pr-6 pb-12 pl-6">
+            <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
+              <div className="flex-1 flex flex-col justify-center items-center lg:items-start min-h-[200px] lg:min-h-0">
+                <img
+                  src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/aba01845-01ea-4dbd-b72f-625f32e2e7b5_1600w.png"
+                  alt="Baku"
+                  className="w-full h-full object-contain object-center lg:object-left max-h-[200px] lg:max-h-[500px]"
+                />
+              </div>
+              <div className="flex-1 flex flex-col justify-between pt-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 lg:gap-12">
+                  <div>
+                    <h4 className="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide">
+                      Contact
+                    </h4>
+                    <ul className="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium">
+                      <li>
+                        <a
+                          href="mailto:info@bakudesserts.com"
+                          className="hover:text-black transition-colors"
+                        >
+                          info@bakudesserts.com
+                        </a>
+                      </li>
+                      <li>M/F 10am - 6pm</li>
+                      <li>Based in Spain</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-sm uppercase mb-4 md:mb-6 tracking-wide">
+                      Follow Us
+                    </h4>
+                    <ul className="space-y-2 md:space-y-3 text-zinc-500 text-sm font-medium">
+                      <li>
+                        <a
+                          href="https://www.instagram.com/baku_dessert"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="hover:text-black transition-colors"
+                        >
+                          Instagram
+                        </a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              </section>
+                <div className="flex flex-col md:flex-row md:items-end gap-6 md:mt-20 mt-12 justify-between">
+                  <div className="max-w-xs">
+                    <p className="leading-relaxed text-sm text-zinc-500">
+                      Pastelería artesanal con visión contemporánea.
+                    </p>
+                  </div>
+                  <div className="text-zinc-400 text-sm">
+                    © 2025 Baku Dessert Studio.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
 
-              <div className="overflow-hidden md:py-4 bg-black w-full border-black/10 border-t border-b pt-3 pb-3 relative">
-                <div className="animate-marquee whitespace-nowrap text-white items-center flex">
-                  {Array(8).fill(null).map((_, i) => (
+      // --- VIEWS ---
+
+      const Home = ({ onNavigate }) => {
+        const [heroIndex, setHeroIndex] = useState(0);
+        const heroImgs = [
+          "https://images.unsplash.com/photo-1579306194872-64d3b7bac4c2?q=80&w=2560",
+          "https://images.unsplash.com/photo-1516919549054-e08258825f80?q=80&w=2560",
+        ];
+        const statementRef = useRef(null);
+
+        useEffect(() => {
+          const interval = setInterval(
+            () => setHeroIndex((prev) => (prev + 1) % heroImgs.length),
+            4000,
+          );
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((e) => {
+                if (e.isIntersecting) e.target.classList.add("is-visible");
+              });
+            },
+            { threshold: 0.1 },
+          );
+          if (statementRef.current) observer.observe(statementRef.current);
+          return () => {
+            clearInterval(interval);
+            observer.disconnect();
+          };
+        }, []);
+
+        return (
+          <div className="page-view animate-fade-in overflow-hidden">
+            <section className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] w-full flex flex-col items-center justify-center relative overflow-hidden bg-black">
+              <div className="z-0 absolute inset-0">
+                <img
+                  src={heroImgs[heroIndex]}
+                  className="object-center w-full h-full object-cover opacity-80 transition-opacity duration-1000"
+                  alt="Hero"
+                />
+                <div className="bg-black/30 absolute inset-0"></div>
+              </div>
+              <div className="select-none cursor-default text-white text-center w-full relative px-4">
+                <h1 className="text-[15vw] md:text-[12vw] leading-[0.85] flex flex-col items-center justify-center font-bold tracking-tighter w-full">
+                  <span className="block">DESSERT</span>
+                  <span className="relative">STUDIO</span>
+                </h1>
+              </div>
+            </section>
+
+            <section className="grid grid-cols-1 md:grid-cols-2 bg-white w-full max-w-none">
+              <div className="flex flex-col order-2 md:order-1 md:py-16 md:px-24 py-12 px-6 justify-center">
+                <h2 className="leading-[0.9] uppercase text-4xl md:text-7xl lg:text-9xl font-semibold text-black tracking-tighter mb-8">
+                  Handmade Bread with
+                  <br />a Modern Vision
+                </h2>
+                <p className="leading-relaxed text-base md:text-xl font-normal text-zinc-500 max-w-lg mb-12">
+                  Exploramos la intersección entre la panadería artesanal
+                  tradicional y la estética contemporánea. Ingredientes puros,
+                  tiempo y diseño.
+                </p>
+                <div>
+                  <button
+                    onClick={() => onNavigate("nosotros")}
+                    className="text-xs font-semibold uppercase tracking-widest border-b-[1.5px] border-black pb-0.5 hover:text-zinc-600 hover:border-zinc-600 transition-colors"
+                  >
+                    Conoce nuestra historia
+                  </button>
+                </div>
+              </div>
+              <div className="flex md:p-12 order-1 md:order-2 bg-white w-full border-zinc-100 border-b relative items-center justify-center">
+                <div className="relative w-full aspect-square flex items-center justify-center overflow-hidden">
+                  <img
+                    src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/f817f7b7-4802-46be-9931-25fbe59366e8_3840w.jpg"
+                    className="object-center mix-blend-multiply w-full h-auto max-w-full object-contain"
+                    alt="Baku"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <div className="overflow-hidden md:py-4 bg-black w-full border-black/10 border-t border-b pt-3 pb-3 relative">
+              <div className="animate-marquee whitespace-nowrap text-white items-center flex">
+                {Array(8)
+                  .fill(null)
+                  .map((_, i) => (
                     <React.Fragment key={i}>
-                      <span className="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">ARTISAN DESSERTS</span>
+                      <span className="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">
+                        ARTISAN DESSERTS
+                      </span>
                       <span className="mx-2 md:mx-4 opacity-50">•</span>
-                      <span className="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">CONTEMPORARY DESIGN</span>
+                      <span className="mx-4 md:mx-8 font-bold tracking-widest text-sm md:text-base">
+                        CONTEMPORARY DESIGN
+                      </span>
                       <span className="mx-2 md:mx-4 opacity-50">•</span>
                     </React.Fragment>
                   ))}
-                </div>
-              </div>
-
-              {/* Interactive Catalog CTA */}
-              <section className="bg-white py-20 md:py-32 px-6 md:px-12 text-center border-b border-black/10">
-                <div className="max-w-4xl mx-auto flex flex-col items-center">
-                  <h2 className="text-3xl md:text-6xl font-semibold uppercase tracking-tighter text-black mb-10 md:mb-14 leading-none">Explora nuestra colección completa</h2>
-                  <a href="https://heyzine.com/flip-book/7c001925b9.html" target="_blank" rel="noopener noreferrer" className="inline-block bg-black text-white px-10 py-6 md:px-16 md:py-8 text-xs font-bold uppercase tracking-[0.2em] hover:bg-zinc-900 transition-all duration-300 transform hover:-translate-y-1">VER CATÁLOGO INTERACTIVO 2026</a>
-                </div>
-              </section>
-
-              <section className="bg-white">
-                <div className="md:px-12 md:pt-24 md:pb-12 px-6 pt-12 pb-8">
-                  <h2 className="md:text-8xl text-4xl font-semibold text-black tracking-tighter mb-4 uppercase">SIGNATURE PIECES</h2>
-                  <p className="md:text-lg leading-relaxed text-base font-light text-black max-w-md">Una selección de nuestras piezas más representativas, elegidas por quienes más disfrutan de nuestro estudio.</p>
-                </div>
-                
-                {/* STATIC ASSETS - UNLOCKED FOR MANUAL EDITING */}
-                <div className="grid grid-cols-1 md:grid-cols-3 md:px-12 md:pb-12 px-6 pb-8 gap-6">
-                  
-                  {/* STATIC WIDGET: Bollo Suizo */}
-                  <div onClick={() => onNavigate('product-detail', MOCK_PRODUCTS.find(p => p.id === 'b1'))} className="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in" style={{ animationDelay: '0ms' }}>
-                    <div className="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d47754d-d458-42a9-91af-d604fbcd3349_1600w.png" className="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain" alt="Bollo Suizo" />
-                    </div>
-                    <div className="mt-4"><h3 className="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">Bollo Suizo</h3></div>
-                  </div>
-
-                  {/* STATIC WIDGET: Palmera de Pistacho */}
-                  <div onClick={() => onNavigate('product-detail', MOCK_PRODUCTS.find(p => p.id === 'p1'))} className="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in" style={{ animationDelay: '100ms' }}>
-                    <div className="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ba344dc-cd03-404e-bf53-c4b26f1a2bc4_1600w.png" className="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain" alt="Palmera de Pistacho" />
-                    </div>
-                    <div className="mt-4"><h3 className="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">Palmera de Pistacho</h3></div>
-                  </div>
-
-                  {/* STATIC WIDGET: Tarta de Fresa */}
-                  <div onClick={() => onNavigate('product-detail', MOCK_PRODUCTS.find(p => p.id === 't3'))} className="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in" style={{ animationDelay: '200ms' }}>
-                    <div className="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden">
-                      <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a18fdea6-1b08-4c8e-8c89-8917954c78bb_1600w.png" className="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain" alt="Tarta de Fresa" />
-                    </div>
-                    <div className="mt-4"><h3 className="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">Tarta de Fresa</h3></div>
-                  </div>
-
-                </div>
-              </section>
-
-              <section className="md:px-12 md:py-32 py-20 px-6 bg-white border-zinc-950/10 border-b">
-                <div className="grid grid-cols-1 md:grid-cols-2 md:gap-24 items-center">
-                  <div className="flex flex-col order-2 md:order-1">
-                    <span className="uppercase text-sm font-semibold text-zinc-400 tracking-widest mb-8">NUESTRA FILOSOFÍA</span>
-                    <h2 className="leading-[0.9] md:text-7xl lg:text-[7rem] text-5xl font-semibold text-black tracking-tighter mb-10">MENOS AZÚCAR,<br/>MÁS SABOR REAL</h2>
-                    <p className="leading-relaxed text-lg font-light text-zinc-600 max-w-2xl mb-16">En BAKU trabajamos con pocos ingredientes y mucha intención. Creemos en una pastelería que no oculta su sabor, sino que lo revela: frutas de temporada, harinas honestas y técnicas precisas.</p>
-                    <div className="flex gap-24 border-black/5 border-t pt-10">
-                      <div><span className="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2">24h</span><span className="text-xs font-bold uppercase tracking-widest text-zinc-400">FERMENTACIÓN</span></div>
-                      <div><span className="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2">100%</span><span className="text-xs font-bold uppercase tracking-widest text-zinc-400">NATURAL</span></div>
-                    </div>
-                  </div>
-                  <div className="flex order-1 md:order-2 items-center justify-center mb-12 md:mb-0">
-                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/02ea7ead-dbcc-4df2-a28a-ccfb47c31ced_1600w.png" className="mix-blend-multiply w-full h-auto max-w-full object-contain scale-110" alt="Philosophy" />
-                  </div>
-                </div>
-              </section>
-
-              <div className="md:px-12 md:py-32 pt-12 pr-6 pb-12 pl-6">
-                  <h2 ref={statementRef} className="flex flex-col text-[9vw] md:text-[8vw] leading-[0.9] md:leading-[0.8] font-semibold tracking-tighter text-black uppercase text-left">
-                      <span className="block overflow-hidden"><span className="block text-reveal-content">DESSERT IS A FORM OF</span></span>
-                      <span className="block overflow-hidden"><span className="block text-reveal-content" style={{ transitionDelay: '0.1s' }}>ART WE CREATE MODERN</span></span>
-                      <span className="block overflow-hidden"><span className="block text-reveal-content" style={{ transitionDelay: '0.2s' }}>SWEET EXPERIENCES</span></span>
-                      <span className="block overflow-hidden"><span className="block text-reveal-content" style={{ transitionDelay: '0.3s' }}>DESSERT STUDIO 2025*</span></span>
-                  </h2>
               </div>
             </div>
-          );
-        };
 
-        const Products = ({ products, onNavigate }) => {
-          const [filter, setFilter] = useState('all');
-          const categories = [
-            { id: 'all', label: 'Ver Todo' },
-            { id: 'bolleria', label: 'Bollería Artesana' },
-            { id: 'palmeras', label: 'Colección Palmeras' },
-            { id: 'tartas', label: 'Colección Tartas' },
-            { id: 'pastas', label: 'Pastas y Tejas' },
-          ];
-          const filtered = useMemo(() => filter === 'all' ? products : products.filter(p => p.category === filter), [products, filter]);
+            {/* Interactive Catalog CTA */}
+            <section className="bg-white py-20 md:py-32 px-6 md:px-12 text-center border-b border-black/10">
+              <div className="max-w-4xl mx-auto flex flex-col items-center">
+                <h2 className="text-3xl md:text-6xl font-semibold uppercase tracking-tighter text-black mb-10 md:mb-14 leading-none">
+                  Explora nuestra colección completa
+                </h2>
+                <a
+                  href="https://heyzine.com/flip-book/7c001925b9.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-black text-white px-10 py-6 md:px-16 md:py-8 text-xs font-bold uppercase tracking-[0.2em] hover:bg-zinc-900 transition-all duration-300 transform hover:-translate-y-1"
+                >
+                  VER CATÁLOGO INTERACTIVO 2026
+                </a>
+              </div>
+            </section>
 
-          return (
-            <div className="pt-8 md:pt-16 px-6 md:px-12 pb-24 max-w-[1920px] mx-auto animate-fade-in w-full">
-              <h1 className="text-6xl md:text-8xl font-semibold tracking-tighter mb-16 md:mb-24 mt-4 text-black uppercase">NUESTRO CATÁLOGO</h1>
-              <div className="product-grid-layout w-full">
-                <aside className="hidden lg:flex flex-col h-[calc(100vh-250px)] sticky pb-8 top-32 justify-between">
-                  <div>
-                    <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-10 text-zinc-400">Apartados</h3>
-                    <div className="flex flex-col gap-6 items-start">
-                      {categories.map((cat) => (
-                        <button key={cat.id} onClick={() => setFilter(cat.id)} className={`text-sm uppercase tracking-[0.15em] text-left transition-all ${filter === cat.id ? 'text-black font-bold border-b border-black pb-0.5' : 'text-zinc-400 font-medium hover:text-black'}`}>{cat.label}</button>
-                      ))}
+            <section className="bg-white">
+              <div className="md:px-12 md:pt-24 md:pb-12 px-6 pt-12 pb-8">
+                <h2 className="md:text-8xl text-4xl font-semibold text-black tracking-tighter mb-4 uppercase">
+                  SIGNATURE PIECES
+                </h2>
+                <p className="md:text-lg leading-relaxed text-base font-light text-black max-w-md">
+                  Una selección de nuestras piezas más representativas, elegidas
+                  por quienes más disfrutan de nuestro estudio.
+                </p>
+              </div>
+
+              {/* STATIC ASSETS - UNLOCKED FOR MANUAL EDITING */}
+              <div className="grid grid-cols-1 md:grid-cols-3 md:px-12 md:pb-12 px-6 pb-8 gap-6">
+                {/* STATIC WIDGET: Bollo Suizo */}
+                <div
+                  onClick={() =>
+                    onNavigate(
+                      "product-detail",
+                      MOCK_PRODUCTS.find((p) => p.id === "b1"),
+                    )
+                  }
+                  className="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in"
+                  style={{ animationDelay: "0ms" }}
+                >
+                  <div className="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden">
+                    <img
+                      src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/2d47754d-d458-42a9-91af-d604fbcd3349_1600w.png"
+                      className="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain"
+                      alt="Bollo Suizo"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">
+                      Bollo Suizo
+                    </h3>
+                  </div>
+                </div>
+
+                {/* STATIC WIDGET: Palmera de Pistacho */}
+                <div
+                  onClick={() =>
+                    onNavigate(
+                      "product-detail",
+                      MOCK_PRODUCTS.find((p) => p.id === "p1"),
+                    )
+                  }
+                  className="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in"
+                  style={{ animationDelay: "100ms" }}
+                >
+                  <div className="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden">
+                    <img
+                      src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4ba344dc-cd03-404e-bf53-c4b26f1a2bc4_1600w.png"
+                      className="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain"
+                      alt="Palmera de Pistacho"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">
+                      Palmera de Pistacho
+                    </h3>
+                  </div>
+                </div>
+
+                {/* STATIC WIDGET: Tarta de Fresa */}
+                <div
+                  onClick={() =>
+                    onNavigate(
+                      "product-detail",
+                      MOCK_PRODUCTS.find((p) => p.id === "t3"),
+                    )
+                  }
+                  className="group cursor-pointer flex flex-col justify-between aspect-[4/5] hover:bg-zinc-50 transition-colors bg-white border-black border p-6 relative w-full h-full overflow-hidden animate-fade-in"
+                  style={{ animationDelay: "200ms" }}
+                >
+                  <div className="flex-1 flex items-center justify-center p-4 w-full h-full overflow-hidden">
+                    <img
+                      src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/a18fdea6-1b08-4c8e-8c89-8917954c78bb_1600w.png"
+                      className="transition-transform duration-700 group-hover:scale-110 mix-blend-multiply w-full h-full max-w-full object-contain"
+                      alt="Tarta de Fresa"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h3 className="text-2xl md:text-3xl font-bold tracking-tighter leading-none text-black uppercase">
+                      Tarta de Fresa
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section className="md:px-12 md:py-32 py-20 px-6 bg-white border-zinc-950/10 border-b">
+              <div className="grid grid-cols-1 md:grid-cols-2 md:gap-24 items-center">
+                <div className="flex flex-col order-2 md:order-1">
+                  <span className="uppercase text-sm font-semibold text-zinc-400 tracking-widest mb-8">
+                    NUESTRA FILOSOFÍA
+                  </span>
+                  <h2 className="leading-[0.9] md:text-7xl lg:text-[7rem] text-5xl font-semibold text-black tracking-tighter mb-10">
+                    MENOS AZÚCAR,
+                    <br />
+                    MÁS SABOR REAL
+                  </h2>
+                  <p className="leading-relaxed text-lg font-light text-zinc-600 max-w-2xl mb-16">
+                    En BAKU trabajamos con pocos ingredientes y mucha intención.
+                    Creemos en una pastelería que no oculta su sabor, sino que
+                    lo revela: frutas de temporada, harinas honestas y técnicas
+                    precisas.
+                  </p>
+                  <div className="flex gap-24 border-black/5 border-t pt-10">
+                    <div>
+                      <span className="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2">
+                        24h
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">
+                        FERMENTACIÓN
+                      </span>
+                    </div>
+                    <div>
+                      <span className="block md:text-6xl text-5xl font-semibold tracking-tighter mb-2">
+                        100%
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-widest text-zinc-400">
+                        NATURAL
+                      </span>
                     </div>
                   </div>
-                  <div className="flex justify-between items-baseline border-t border-black/10 pt-6"><span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400">Total</span><span className="text-sm font-semibold tracking-tight text-black">{filtered.length}</span></div>
-                </aside>
-                <div className="lg:hidden w-full mb-8 sticky top-16 z-30 bg-white/95 backdrop-blur-sm py-4 -mx-6 px-6 border-b border-black/5">
-                  <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+                </div>
+                <div className="flex order-1 md:order-2 items-center justify-center mb-12 md:mb-0">
+                  <img
+                    src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/02ea7ead-dbcc-4df2-a28a-ccfb47c31ced_1600w.png"
+                    className="mix-blend-multiply w-full h-auto max-w-full object-contain scale-110"
+                    alt="Philosophy"
+                  />
+                </div>
+              </div>
+            </section>
+
+            <div className="md:px-12 md:py-32 pt-12 pr-6 pb-12 pl-6">
+              <h2
+                ref={statementRef}
+                className="flex flex-col text-[9vw] md:text-[8vw] leading-[0.9] md:leading-[0.8] font-semibold tracking-tighter text-black uppercase text-left"
+              >
+                <span className="block overflow-hidden">
+                  <span className="block text-reveal-content">
+                    DESSERT IS A FORM OF
+                  </span>
+                </span>
+                <span className="block overflow-hidden">
+                  <span
+                    className="block text-reveal-content"
+                    style={{ transitionDelay: "0.1s" }}
+                  >
+                    ART WE CREATE MODERN
+                  </span>
+                </span>
+                <span className="block overflow-hidden">
+                  <span
+                    className="block text-reveal-content"
+                    style={{ transitionDelay: "0.2s" }}
+                  >
+                    SWEET EXPERIENCES
+                  </span>
+                </span>
+                <span className="block overflow-hidden">
+                  <span
+                    className="block text-reveal-content"
+                    style={{ transitionDelay: "0.3s" }}
+                  >
+                    DESSERT STUDIO 2025*
+                  </span>
+                </span>
+              </h2>
+            </div>
+          </div>
+        );
+      };
+
+      const Products = ({ products, onNavigate }) => {
+        const [filter, setFilter] = useState("all");
+        const categories = [
+          { id: "all", label: "Ver Todo" },
+          { id: "bolleria", label: "Bollería Artesana" },
+          { id: "palmeras", label: "Colección Palmeras" },
+          { id: "tartas", label: "Colección Tartas" },
+          { id: "pastas", label: "Pastas y Tejas" },
+        ];
+        const filtered = useMemo(
+          () =>
+            filter === "all"
+              ? products
+              : products.filter((p) => p.category === filter),
+          [products, filter],
+        );
+
+        return (
+          <div className="pt-8 md:pt-16 px-6 md:px-12 pb-24 max-w-[1920px] mx-auto animate-fade-in w-full">
+            <h1 className="text-6xl md:text-8xl font-semibold tracking-tighter mb-16 md:mb-24 mt-4 text-black uppercase">
+              NUESTRO CATÁLOGO
+            </h1>
+            <div className="product-grid-layout w-full">
+              <aside className="hidden lg:flex flex-col h-[calc(100vh-250px)] sticky pb-8 top-32 justify-between">
+                <div>
+                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.15em] mb-10 text-zinc-400">
+                    Apartados
+                  </h3>
+                  <div className="flex flex-col gap-6 items-start">
                     {categories.map((cat) => (
-                      <button key={cat.id} onClick={() => setFilter(cat.id)} className={`text-[11px] uppercase tracking-[0.15em] whitespace-nowrap transition-all ${filter === cat.id ? 'text-black font-bold border-b border-black pb-0.5' : 'text-zinc-400 font-medium hover:text-black'}`}>{cat.label}</button>
+                      <button
+                        key={cat.id}
+                        onClick={() => setFilter(cat.id)}
+                        className={`text-sm uppercase tracking-[0.15em] text-left transition-all ${filter === cat.id ? "text-black font-bold border-b border-black pb-0.5" : "text-zinc-400 font-medium hover:text-black"}`}
+                      >
+                        {cat.label}
+                      </button>
                     ))}
                   </div>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 w-full">
-                  {filtered.map((p, i) => (
-                    <div key={p.id} onClick={() => onNavigate('product-detail', p)} className="group relative flex flex-col justify-between border border-black bg-white w-full overflow-hidden aspect-[4/5] p-6 cursor-pointer hover:bg-zinc-50 transition-colors duration-300 animate-fade-in" style={{ animationDelay: `${i * 50}ms` }}>
-                      <div className="flex-1 flex items-center justify-center w-full h-full overflow-hidden relative">
-                         <img src={p.img} className="w-full h-full object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-110" alt={p.name} />
-                      </div>
-                      <div className="mt-4"><h3 className="text-xl md:text-2xl font-bold tracking-tighter leading-none text-black uppercase">{p.name}{p.unit && <span className="text-sm normal-case font-medium text-zinc-400 ml-1">{p.unit}</span>}</h3></div>
-                    </div>
+                <div className="flex justify-between items-baseline border-t border-black/10 pt-6">
+                  <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-zinc-400">
+                    Total
+                  </span>
+                  <span className="text-sm font-semibold tracking-tight text-black">
+                    {filtered.length}
+                  </span>
+                </div>
+              </aside>
+              <div className="lg:hidden w-full mb-8 sticky top-16 z-30 bg-white/95 backdrop-blur-sm py-4 -mx-6 px-6 border-b border-black/5">
+                <div className="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+                  {categories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      onClick={() => setFilter(cat.id)}
+                      className={`text-[11px] uppercase tracking-[0.15em] whitespace-nowrap transition-all ${filter === cat.id ? "text-black font-bold border-b border-black pb-0.5" : "text-zinc-400 font-medium hover:text-black"}`}
+                    >
+                      {cat.label}
+                    </button>
                   ))}
                 </div>
               </div>
-            </div>
-          );
-        };
-
-        const ProductDetail = ({ product, onNavigate, allProducts }) => {
-          const idx = allProducts.findIndex(p => p.id === product.id);
-          const next = allProducts[(idx + 1) % allProducts.length];
-          const prev = allProducts[(idx - 1 + allProducts.length) % allProducts.length];
-
-          return (
-            <div className="pt-8 md:pt-16 px-6 md:px-12 pb-24 max-w-[1920px] mx-auto animate-fade-in w-full">
-              <div className="border border-black/10 w-full bg-white grid grid-cols-1 md:grid-cols-2">
-                <div className="relative p-8 md:p-12 md:border-r border-black/10 border-b md:border-b-0 flex items-center justify-center bg-white aspect-square md:aspect-auto min-h-[400px] md:min-h-[600px] overflow-hidden">
-                  <img src={product.img} alt={product.name} className="w-full h-full object-cover mix-blend-multiply max-w-[90%] max-h-[90%]" />
-                </div>
-                <div className="relative p-6 md:p-16 flex flex-col justify-center min-h-[400px] md:min-h-[600px]">
-                  <button onClick={() => onNavigate('catalogo')} className="absolute top-6 right-6 md:top-8 md:right-8 text-sm md:text-lg font-medium text-zinc-400 hover:text-black transition-colors tracking-tight uppercase">Volver al catálogo</button>
-                  <div className="flex-1 flex flex-col justify-center mt-12 md:mt-0">
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-black leading-[0.9] mb-8 uppercase">{product.name}{product.unit && <span className="text-2xl lowercase font-medium text-zinc-300 ml-2">{product.unit}</span>}</h2>
-                    <p className="text-base md:text-xl font-normal text-zinc-800 leading-relaxed max-w-md">{product.desc}</p>
-                  </div>
-                  <div className="mt-12 md:mt-16 flex flex-col md:flex-row md:items-end justify-between w-full gap-6">
-                    <div className="flex items-center gap-2">
-                      <button onClick={() => onNavigate('product-detail', prev)} className="text-lg md:text-xl font-medium text-zinc-400 hover:text-black transition-colors tracking-tight">Anterior</button>
-                      <span className="text-lg text-zinc-300">/</span>
-                      <button onClick={() => onNavigate('product-detail', next)} className="text-lg md:text-xl font-medium text-zinc-400 hover:text-black transition-colors tracking-tight">Siguiente</button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12 w-full">
+                {filtered.map((p, i) => (
+                  <div
+                    key={p.id}
+                    onClick={() => onNavigate("product-detail", p)}
+                    className="group relative flex flex-col justify-between border border-black bg-white w-full overflow-hidden aspect-[4/5] p-6 cursor-pointer hover:bg-zinc-50 transition-colors duration-300 animate-fade-in"
+                    style={{ animationDelay: `${i * 50}ms` }}
+                  >
+                    <div className="flex-1 flex items-center justify-center w-full h-full overflow-hidden relative">
+                      <img
+                        src={p.img}
+                        className="w-full h-full object-cover mix-blend-multiply transition-transform duration-500 group-hover:scale-110"
+                        alt={p.name}
+                      />
                     </div>
+                    <div className="mt-4">
+                      <h3 className="text-xl md:text-2xl font-bold tracking-tighter leading-none text-black uppercase">
+                        {p.name}
+                        {p.unit && (
+                          <span className="text-sm normal-case font-medium text-zinc-400 ml-1">
+                            {p.unit}
+                          </span>
+                        )}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      const ProductDetail = ({ product, onNavigate, allProducts }) => {
+        const idx = allProducts.findIndex((p) => p.id === product.id);
+        const next = allProducts[(idx + 1) % allProducts.length];
+        const prev =
+          allProducts[(idx - 1 + allProducts.length) % allProducts.length];
+
+        return (
+          <div className="pt-8 md:pt-16 px-6 md:px-12 pb-24 max-w-[1920px] mx-auto animate-fade-in w-full">
+            <div className="border border-black/10 w-full bg-white grid grid-cols-1 md:grid-cols-2">
+              <div className="relative p-8 md:p-12 md:border-r border-black/10 border-b md:border-b-0 flex items-center justify-center bg-white aspect-square md:aspect-auto min-h-[400px] md:min-h-[600px] overflow-hidden">
+                <img
+                  src={product.img}
+                  alt={product.name}
+                  className="w-full h-full object-cover mix-blend-multiply max-w-[90%] max-h-[90%]"
+                />
+              </div>
+              <div className="relative p-6 md:p-16 flex flex-col justify-center min-h-[400px] md:min-h-[600px]">
+                <button
+                  onClick={() => onNavigate("catalogo")}
+                  className="absolute top-6 right-6 md:top-8 md:right-8 text-sm md:text-lg font-medium text-zinc-400 hover:text-black transition-colors tracking-tight uppercase"
+                >
+                  Volver al catálogo
+                </button>
+                <div className="flex-1 flex flex-col justify-center mt-12 md:mt-0">
+                  <h2 className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tighter text-black leading-[0.9] mb-8 uppercase">
+                    {product.name}
+                    {product.unit && (
+                      <span className="text-2xl lowercase font-medium text-zinc-300 ml-2">
+                        {product.unit}
+                      </span>
+                    )}
+                  </h2>
+                  <p className="text-base md:text-xl font-normal text-zinc-800 leading-relaxed max-w-md">
+                    {product.desc}
+                  </p>
+                </div>
+                <div className="mt-12 md:mt-16 flex flex-col md:flex-row md:items-end justify-between w-full gap-6">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => onNavigate("product-detail", prev)}
+                      className="text-lg md:text-xl font-medium text-zinc-400 hover:text-black transition-colors tracking-tight"
+                    >
+                      Anterior
+                    </button>
+                    <span className="text-lg text-zinc-300">/</span>
+                    <button
+                      onClick={() => onNavigate("product-detail", next)}
+                      className="text-lg md:text-xl font-medium text-zinc-400 hover:text-black transition-colors tracking-tight"
+                    >
+                      Siguiente
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-          );
+          </div>
+        );
+      };
+
+      const About = () => (
+        <div className="min-h-screen flex flex-col overflow-hidden animate-fade-in md:pt-24 bg-white pt-12 pb-12 relative justify-between">
+          <div className="flex flex-col bg-white w-full z-20 pt-12 md:pt-24 pb-20 md:pb-40 relative items-center justify-center">
+            <div className="flex flex-col w-full px-6 items-center">
+              <span className="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 border-b border-zinc-300 pb-1 mb-8 md:mb-24">
+                Based in Madrid
+              </span>
+              <h2 className="text-4xl md:text-7xl lg:text-[7rem] font-semibold tracking-tighter text-center text-black leading-[0.9] max-w-7xl mb-8 md:mb-24">
+                "We are Artisans with a Studio Mindset."
+              </h2>
+              <p className="text-sm md:text-xl leading-relaxed font-normal text-zinc-600 text-center max-w-4xl px-4">
+                <span className="font-semibold text-black">
+                  BAKU dessert studio
+                </span>
+                , somos un obrador moderno con una visión clara: diseñar
+                productos con identidad, atención al detalle y una estética
+                cuidada.
+              </p>
+            </div>
+          </div>
+          <div className="px-6 md:px-12 flex z-10 w-full relative items-start justify-between">
+            <span className="text-[10px] uppercase font-semibold text-zinc-500 tracking-[0.15em]">
+              Dessert Studio 2025
+            </span>
+            <span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-zinc-500">
+              Nosotros
+            </span>
+          </div>
+          <div className="flex-1 flex flex-col md:flex-row z-20 gap-6 md:gap-0 overflow-hidden w-full mt-10 mb-10 pt-10 pb-20 relative items-center justify-center">
+            <div className="group relative w-[70vw] md:w-[320px] aspect-[2/3] bg-white shadow-2xl p-3 transform md:-rotate-12 md:translate-x-12 hover:scale-105 md:hover:scale-110 hover:rotate-0 transition-all border border-zinc-100">
+              <img
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6c748dea-6043-49fa-96de-7962710a4267_800w.png"
+                className="w-full h-full object-contain"
+                alt="1"
+              />
+            </div>
+            <div className="group relative w-[70vw] md:w-[320px] aspect-[2/3] bg-white shadow-2xl p-3 transform md:-rotate-3 z-20 hover:scale-105 md:hover:scale-110 hover:rotate-0 transition-all border border-zinc-100 md:mx-[-80px]">
+              <img
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/960b9892-b484-45bd-93e1-39675b208be5_800w.png"
+                className="w-full h-full object-contain"
+                alt="2"
+              />
+            </div>
+            <div className="group relative w-[70vw] md:w-[320px] aspect-[2/3] bg-white shadow-2xl p-3 transform md:rotate-12 md:-translate-x-12 hover:scale-105 md:hover:scale-110 hover:rotate-0 transition-all border border-zinc-100">
+              <img
+                src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/003e3091-058b-4fd5-a2f6-326eb20baca2_1600w.png"
+                className="mix-blend-multiply w-full h-full object-cover"
+                alt="3"
+              />
+            </div>
+          </div>
+          <h1 className="text-[18vw] leading-[0.75] font-semibold tracking-tighter text-center text-black pointer-events-none select-none z-0 mt-auto md:-mb-10 mix-blend-difference relative uppercase">
+            About Us
+          </h1>
+        </div>
+      );
+
+      const Contact = () => (
+        <div className="min-h-screen flex flex-col pt-16 md:pt-20">
+          <section className="grid grid-cols-1 md:grid-cols-2 flex-grow border-b border-black/10">
+            <div className="p-8 md:p-24 flex flex-col md:border-r border-black/10 justify-center border-b md:border-b-0">
+              <div className="mb-8 md:mb-12">
+                <span className="text-[10px] uppercase font-semibold text-zinc-400 tracking-[0.15em] block">
+                  (CONTACTO)
+                </span>
+              </div>
+              <h2 className="leading-[0.85] text-5xl md:text-9xl font-semibold tracking-tighter mb-8 md:mb-12">
+                <span className="block my-2">WORK</span>
+                <span className="block">WITH US</span>
+              </h2>
+              <p className="leading-relaxed text-sm md:text-base font-normal text-zinc-600 max-w-md">
+                Abrimos la agenda a eventos y colaboraciones que nos emocionen.
+                Si tienes esa idea que te da vueltas, tráela.
+              </p>
+            </div>
+            <div className="p-6 md:p-24 flex flex-col justify-center">
+              <form className="flex flex-col gap-8 md:gap-10 w-full max-w-lg mx-auto md:mx-0">
+                <input
+                  type="text"
+                  placeholder="TU NOMBRE"
+                  className="w-full bg-transparent border-b border-black/10 py-4 md:py-6 text-2xl md:text-5xl font-medium placeholder:text-zinc-200 text-black focus:outline-none focus:border-black transition-colors uppercase tracking-tight"
+                />
+                <input
+                  type="email"
+                  placeholder="EMAIL"
+                  className="w-full bg-transparent border-b border-black/10 py-4 md:py-6 text-2xl md:text-5xl font-medium placeholder:text-zinc-200 text-black focus:outline-none focus:border-black transition-colors uppercase tracking-tight"
+                />
+                <input
+                  type="text"
+                  placeholder="TU PROYECTO"
+                  className="text-2xl md:text-5xl placeholder:text-zinc-200 focus:outline-none focus:border-black transition-colors uppercase font-medium text-black tracking-tight bg-transparent w-full border-black/10 border-b py-4 md:py-6"
+                />
+                <button
+                  type="button"
+                  className="mt-8 md:mt-12 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] hover:opacity-60 transition-opacity w-fit text-black group"
+                >
+                  <span className="border-b border-black pb-0.5 group-hover:border-transparent transition-colors">
+                    ENVIAR CONSULTA
+                  </span>
+                  <ArrowRight className="w-4 h-4 stroke-[1.5]" />
+                </button>
+              </form>
+            </div>
+          </section>
+        </div>
+      );
+
+      // --- MAIN APP ---
+
+      const App = () => {
+        const [view, setView] = useState("home");
+        const [mobileMenu, setMobileMenu] = useState(false);
+        const [selectedProduct, setSelectedProduct] = useState(null);
+
+        const navigate = (v, p = null) => {
+          if (p) setSelectedProduct(p);
+          setView(v);
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          setMobileMenu(false);
         };
 
-        const About = () => (
-          <div className="min-h-screen flex flex-col overflow-hidden animate-fade-in md:pt-24 bg-white pt-12 pb-12 relative justify-between">
-            <div className="flex flex-col bg-white w-full z-20 pt-12 md:pt-24 pb-20 md:pb-40 relative items-center justify-center">
-              <div className="flex flex-col w-full px-6 items-center">
-                <span className="text-[10px] md:text-xs font-medium uppercase tracking-[0.2em] text-zinc-400 border-b border-zinc-300 pb-1 mb-8 md:mb-24">Based in Madrid</span>
-                <h2 className="text-4xl md:text-7xl lg:text-[7rem] font-semibold tracking-tighter text-center text-black leading-[0.9] max-w-7xl mb-8 md:mb-24">"We are Artisans with a Studio Mindset."</h2>
-                <p className="text-sm md:text-xl leading-relaxed font-normal text-zinc-600 text-center max-w-4xl px-4">
-                  <span className="font-semibold text-black">BAKU dessert studio</span>, somos un obrador moderno con una visión clara: diseñar productos con identidad, atención al detalle y una estética cuidada.
+        return (
+          <div className="flex flex-col min-h-screen">
+            <Navbar
+              currentView={view}
+              onNavigate={navigate}
+              onToggleMenu={() => setMobileMenu(!mobileMenu)}
+            />
+
+            <div
+              className={`fixed inset-0 z-50 bg-white transform ${mobileMenu ? "translate-y-0" : "translate-y-full"} transition-transform duration-500 flex flex-col pt-24 px-6 h-screen w-screen overflow-hidden`}
+            >
+              <button
+                onClick={() => setMobileMenu(false)}
+                className="absolute top-4 right-4 p-2"
+              >
+                <X className="w-8 h-8 stroke-[1.5]" />
+              </button>
+              <nav className="flex flex-col gap-6 mt-8">
+                {["home", "catalogo", "nosotros", "contacto"].map((v) => (
+                  <button
+                    key={v}
+                    onClick={() => navigate(v)}
+                    className="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase"
+                  >
+                    {v === "catalogo" ? "Catálogo" : v}
+                  </button>
+                ))}
+              </nav>
+              <div className="mt-auto mb-12">
+                <p className="text-zinc-400 text-sm uppercase tracking-widest">
+                  Baku Dessert Studio
                 </p>
               </div>
             </div>
-            <div className="px-6 md:px-12 flex z-10 w-full relative items-start justify-between"><span className="text-[10px] uppercase font-semibold text-zinc-500 tracking-[0.15em]">Dessert Studio 2025</span><span className="text-[10px] font-semibold uppercase tracking-[0.15em] text-zinc-500">Nosotros</span></div>
-            <div className="flex-1 flex flex-col md:flex-row z-20 gap-6 md:gap-0 overflow-hidden w-full mt-10 mb-10 pt-10 pb-20 relative items-center justify-center">
-                <div className="group relative w-[70vw] md:w-[320px] aspect-[2/3] bg-white shadow-2xl p-3 transform md:-rotate-12 md:translate-x-12 hover:scale-105 md:hover:scale-110 hover:rotate-0 transition-all border border-zinc-100"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/6c748dea-6043-49fa-96de-7962710a4267_800w.png" className="w-full h-full object-contain" alt="1" /></div>
-                <div className="group relative w-[70vw] md:w-[320px] aspect-[2/3] bg-white shadow-2xl p-3 transform md:-rotate-3 z-20 hover:scale-105 md:hover:scale-110 hover:rotate-0 transition-all border border-zinc-100 md:mx-[-80px]"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/960b9892-b484-45bd-93e1-39675b208be5_800w.png" className="w-full h-full object-contain" alt="2" /></div>
-                <div className="group relative w-[70vw] md:w-[320px] aspect-[2/3] bg-white shadow-2xl p-3 transform md:rotate-12 md:-translate-x-12 hover:scale-105 md:hover:scale-110 hover:rotate-0 transition-all border border-zinc-100"><img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/003e3091-058b-4fd5-a2f6-326eb20baca2_1600w.png" className="mix-blend-multiply w-full h-full object-cover" alt="3" /></div>
-            </div>
-            <h1 className="text-[18vw] leading-[0.75] font-semibold tracking-tighter text-center text-black pointer-events-none select-none z-0 mt-auto md:-mb-10 mix-blend-difference relative uppercase">About Us</h1>
+
+            <main className="flex-grow pt-16 md:pt-20">
+              {view === "home" && <Home onNavigate={navigate} />}
+              {view === "catalogo" && (
+                <Products products={MOCK_PRODUCTS} onNavigate={navigate} />
+              )}
+              {view === "product-detail" && selectedProduct && (
+                <ProductDetail
+                  product={selectedProduct}
+                  onNavigate={navigate}
+                  allProducts={MOCK_PRODUCTS}
+                />
+              )}
+              {view === "nosotros" && <About />}
+              {view === "contacto" && <Contact />}
+            </main>
+
+            <Footer />
           </div>
         );
+      };
 
-        const Contact = () => (
-          <div className="min-h-screen flex flex-col pt-16 md:pt-20">
-            <section className="grid grid-cols-1 md:grid-cols-2 flex-grow border-b border-black/10">
-              <div className="p-8 md:p-24 flex flex-col md:border-r border-black/10 justify-center border-b md:border-b-0">
-                <div className="mb-8 md:mb-12"><span className="text-[10px] uppercase font-semibold text-zinc-400 tracking-[0.15em] block">(CONTACTO)</span></div>
-                <h2 className="leading-[0.85] text-5xl md:text-9xl font-semibold tracking-tighter mb-8 md:mb-12"><span className="block my-2">WORK</span><span className="block">WITH US</span></h2>
-                <p className="leading-relaxed text-sm md:text-base font-normal text-zinc-600 max-w-md">Abrimos la agenda a eventos y colaboraciones que nos emocionen. Si tienes esa idea que te da vueltas, tráela.</p>
-              </div>
-              <div className="p-6 md:p-24 flex flex-col justify-center">
-                 <form className="flex flex-col gap-8 md:gap-10 w-full max-w-lg mx-auto md:mx-0">
-                    <input type="text" placeholder="TU NOMBRE" className="w-full bg-transparent border-b border-black/10 py-4 md:py-6 text-2xl md:text-5xl font-medium placeholder:text-zinc-200 text-black focus:outline-none focus:border-black transition-colors uppercase tracking-tight" />
-                    <input type="email" placeholder="EMAIL" className="w-full bg-transparent border-b border-black/10 py-4 md:py-6 text-2xl md:text-5xl font-medium placeholder:text-zinc-200 text-black focus:outline-none focus:border-black transition-colors uppercase tracking-tight" />
-                    <input type="text" placeholder="TU PROYECTO" className="text-2xl md:text-5xl placeholder:text-zinc-200 focus:outline-none focus:border-black transition-colors uppercase font-medium text-black tracking-tight bg-transparent w-full border-black/10 border-b py-4 md:py-6" />
-                    <button type="button" className="mt-8 md:mt-12 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.15em] hover:opacity-60 transition-opacity w-fit text-black group">
-                      <span className="border-b border-black pb-0.5 group-hover:border-transparent transition-colors">ENVIAR CONSULTA</span><ArrowRight className="w-4 h-4 stroke-[1.5]" />
-                    </button>
-                 </form>
-              </div>
-            </section>
-          </div>
-        );
-
-        // --- MAIN APP ---
-
-        const App = () => {
-          const [view, setView] = useState('home');
-          const [mobileMenu, setMobileMenu] = useState(false);
-          const [selectedProduct, setSelectedProduct] = useState(null);
-
-          const navigate = (v, p = null) => {
-            if(p) setSelectedProduct(p);
-            setView(v);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            setMobileMenu(false);
-          };
-
-          return (
-            <div className="flex flex-col min-h-screen">
-              <Navbar currentView={view} onNavigate={navigate} onToggleMenu={() => setMobileMenu(!mobileMenu)} />
-              
-              <div className={`fixed inset-0 z-50 bg-white transform ${mobileMenu ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-500 flex flex-col pt-24 px-6 h-screen w-screen overflow-hidden`}>
-                <button onClick={() => setMobileMenu(false)} className="absolute top-4 right-4 p-2"><X className="w-8 h-8 stroke-[1.5]" /></button>
-                <nav className="flex flex-col gap-6 mt-8">
-                    {['home', 'catalogo', 'nosotros', 'contacto'].map(v => (
-                      <button key={v} onClick={() => navigate(v)} className="text-4xl md:text-6xl font-semibold tracking-tighter text-left py-2 border-b border-zinc-100 uppercase">{v === 'catalogo' ? 'Catálogo' : v}</button>
-                    ))}
-                </nav>
-                <div className="mt-auto mb-12"><p className="text-zinc-400 text-sm uppercase tracking-widest">Baku Dessert Studio</p></div>
-              </div>
-
-              <main className="flex-grow pt-16 md:pt-20">
-                {view === 'home' && <Home onNavigate={navigate} />}
-                {view === 'catalogo' && <Products products={MOCK_PRODUCTS} onNavigate={navigate} />}
-                {view === 'product-detail' && selectedProduct && <ProductDetail product={selectedProduct} onNavigate={navigate} allProducts={MOCK_PRODUCTS} />}
-                {view === 'nosotros' && <About />}
-                {view === 'contacto' && <Contact />}
-              </main>
-
-              <Footer />
-            </div>
-          );
-        };
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
     </script>
-
-</body></html>
+  </body>
+</html>
